@@ -2,6 +2,7 @@ package com.example.suneel.dboperations.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -18,10 +19,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     // you provide access to all the views for a data item in a view holder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        public TextView mTextView;
-        public ViewHolder(TextView v) {
+        public TextView tv;
+        public ViewHolder(View v) {
             super(v);
-            mTextView = v;
+        tv=(TextView)v.findViewById(R.id.tv1);
+
+
         }
     }
 
@@ -32,14 +35,18 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     // Create new views (invoked by the layout manager)
     @Override
-    public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+    public ViewHolder onCreateViewHolder(ViewGroup parent,
                                                    int viewType) {
         // create a new view
-        TextView v = (TextView) LayoutInflater.from(parent.getContext())
-                .inflate(android.R.layout.simple_list_item_1, parent, false);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.adapter_activity, parent, false);
+       /* TextView v = (TextView) LayoutInflater.from(parent.getContext())
+                .inflate(android.R.layout.simple_list_item_1, parent, false);*/
 
-        ViewHolder vh = new ViewHolder(v);
+        ViewHolder vh = new ViewHolder( view);
         return vh;
+      /*  MyViewHolder myViewHolder = new MyViewHolder(view);
+        return myViewHolder;*/
     }
 
     // Replace the contents of a view (invoked by the layout manager)
@@ -47,7 +54,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.mTextView.setText(mDataset[position]);
+
+        holder.tv.setText(mDataset[position]);
 
     }
 
